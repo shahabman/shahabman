@@ -37,6 +37,14 @@ class HandEvaluation:
 
         return (int(self.category),) + self.ranks
 
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, HandEvaluation):
+            return NotImplemented
+        return self.compare_key() == other.compare_key()
+
+    def __hash__(self) -> int:
+        return hash(self.compare_key())
+
     def __lt__(self, other: "HandEvaluation") -> bool:
         return self.compare_key() < other.compare_key()
 
